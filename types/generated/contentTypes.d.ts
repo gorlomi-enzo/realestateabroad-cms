@@ -759,275 +759,79 @@ export interface ApiBlogPostBlogPost extends Schema.CollectionType {
   };
 }
 
-export interface ApiConsultationCountryConsultationCountry
-  extends Schema.CollectionType {
-  collectionName: 'consultation_countries';
+export interface ApiNewsArticleNewsArticle extends Schema.CollectionType {
+  collectionName: 'news_articles';
   info: {
-    singularName: 'consultation-country';
-    pluralName: 'consultation-countries';
-    displayName: 'Consultation Country';
-    description: 'Country-specific property consultation and buying guides';
+    singularName: 'news-article';
+    pluralName: 'news-articles';
+    displayName: 'News Article';
+    description: 'News articles for multiple sites';
   };
   options: {
     draftAndPublish: true;
-    comment: '';
   };
   attributes: {
-    name: Attribute.String &
+    title: Attribute.String &
       Attribute.Required &
-      Attribute.Unique &
       Attribute.SetMinMaxLength<{
-        maxLength: 100;
+        maxLength: 200;
       }>;
-    slug: Attribute.UID<
-      'api::consultation-country.consultation-country',
-      'name'
-    > &
+    slug: Attribute.UID<'api::news-article.news-article', 'title'> &
       Attribute.Required &
       Attribute.Unique;
-    title: Attribute.String;
-    description: Attribute.Text;
-    featured: Attribute.Boolean & Attribute.DefaultTo<false>;
-    meta_title: Attribute.String &
+    excerpt: Attribute.Text &
+      Attribute.Required &
       Attribute.SetMinMaxLength<{
-        maxLength: 255;
+        maxLength: 300;
       }>;
-    meta_description: Attribute.Text &
+    content: Attribute.RichText & Attribute.Required;
+    category: Attribute.Enumeration<
+      [
+        'New Bonuses',
+        'Regulation',
+        'Market News',
+        'Innovation',
+        'Trends',
+        'Industry Analysis'
+      ]
+    > &
+      Attribute.Required;
+    publishedDate: Attribute.DateTime & Attribute.Required;
+    lastUpdated: Attribute.DateTime;
+    readTime: Attribute.String &
+      Attribute.Required &
       Attribute.SetMinMaxLength<{
-        maxLength: 500;
+        maxLength: 10;
+      }> &
+      Attribute.DefaultTo<'5 min'>;
+    site: Attribute.Enumeration<['onlinecasinobonus', 'realestateabroad']> &
+      Attribute.Required &
+      Attribute.DefaultTo<'onlinecasinobonus'>;
+    status: Attribute.Enumeration<['draft', 'published']> &
+      Attribute.Required &
+      Attribute.DefaultTo<'draft'>;
+    featuredImage: Attribute.Media;
+    metaTitle: Attribute.String &
+      Attribute.SetMinMaxLength<{
+        maxLength: 60;
       }>;
-    keywords: Attribute.JSON;
-    hero_image_url: Attribute.String;
-    flag_image_url: Attribute.String;
-    market_overview: Attribute.Text;
-    market_trends: Attribute.JSON;
-    investment_rating: Attribute.String;
-    risk_assessment: Attribute.JSON;
-    legal_considerations: Attribute.JSON;
-    buying_process: Attribute.JSON;
-    site: Attribute.Relation<
-      'api::consultation-country.consultation-country',
-      'manyToOne',
-      'api::site.site'
-    >;
+    metaDescription: Attribute.Text &
+      Attribute.SetMinMaxLength<{
+        maxLength: 160;
+      }>;
+    metaKeywords: Attribute.String;
+    canonicalUrl: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
-      'api::consultation-country.consultation-country',
+      'api::news-article.news-article',
       'oneToOne',
       'admin::user'
     > &
       Attribute.Private;
     updatedBy: Attribute.Relation<
-      'api::consultation-country.consultation-country',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiFinancingCountryFinancingCountry
-  extends Schema.CollectionType {
-  collectionName: 'financing_countries';
-  info: {
-    singularName: 'financing-country';
-    pluralName: 'financing-countries';
-    displayName: 'Financing Country';
-    description: 'Country-specific financing and mortgage information';
-  };
-  options: {
-    draftAndPublish: true;
-    comment: '';
-  };
-  attributes: {
-    name: Attribute.String &
-      Attribute.Required &
-      Attribute.Unique &
-      Attribute.SetMinMaxLength<{
-        maxLength: 100;
-      }>;
-    slug: Attribute.UID<'api::financing-country.financing-country', 'name'> &
-      Attribute.Required &
-      Attribute.Unique;
-    title: Attribute.String;
-    description: Attribute.Text;
-    featured: Attribute.Boolean & Attribute.DefaultTo<false>;
-    meta_title: Attribute.String &
-      Attribute.SetMinMaxLength<{
-        maxLength: 255;
-      }>;
-    meta_description: Attribute.Text &
-      Attribute.SetMinMaxLength<{
-        maxLength: 500;
-      }>;
-    keywords: Attribute.JSON;
-    hero_image_url: Attribute.String;
-    flag_image_url: Attribute.String;
-    overview: Attribute.Text;
-    local_mortgages: Attribute.JSON;
-    banks: Attribute.JSON;
-    mortgage_rates: Attribute.JSON;
-    site: Attribute.Relation<
-      'api::financing-country.financing-country',
-      'manyToOne',
-      'api::site.site'
-    >;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::financing-country.financing-country',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::financing-country.financing-country',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiSeoCitySeoCity extends Schema.CollectionType {
-  collectionName: 'seo_cities';
-  info: {
-    singularName: 'seo-city';
-    pluralName: 'seo-cities';
-    displayName: 'SEO City';
-    description: 'SEO-optimized city pages for property listings';
-  };
-  options: {
-    draftAndPublish: true;
-    comment: '';
-  };
-  attributes: {
-    name: Attribute.String &
-      Attribute.Required &
-      Attribute.SetMinMaxLength<{
-        maxLength: 100;
-      }>;
-    slug: Attribute.UID<'api::seo-city.seo-city', 'name'> & Attribute.Required;
-    featured: Attribute.Boolean & Attribute.DefaultTo<false>;
-    meta_title: Attribute.String &
-      Attribute.SetMinMaxLength<{
-        maxLength: 255;
-      }>;
-    meta_description: Attribute.Text &
-      Attribute.SetMinMaxLength<{
-        maxLength: 500;
-      }>;
-    keywords: Attribute.JSON;
-    description: Attribute.Text;
-    image_url: Attribute.String;
-    property_count: Attribute.Integer & Attribute.DefaultTo<0>;
-    average_price: Attribute.Integer & Attribute.DefaultTo<0>;
-    average_yield: Attribute.Decimal & Attribute.DefaultTo<0>;
-    population: Attribute.Integer;
-    area_km2: Attribute.Decimal;
-    timezone: Attribute.String;
-    coordinates: Attribute.JSON;
-    investment_rating: Attribute.String;
-    highlights: Attribute.JSON;
-    amenities: Attribute.JSON;
-    transport_links: Attribute.JSON;
-    country: Attribute.Relation<
-      'api::seo-city.seo-city',
-      'manyToOne',
-      'api::seo-country.seo-country'
-    >;
-    site: Attribute.Relation<
-      'api::seo-city.seo-city',
-      'manyToOne',
-      'api::site.site'
-    >;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::seo-city.seo-city',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::seo-city.seo-city',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiSeoCountrySeoCountry extends Schema.CollectionType {
-  collectionName: 'seo_countries';
-  info: {
-    singularName: 'seo-country';
-    pluralName: 'seo-countries';
-    displayName: 'SEO Country';
-    description: 'SEO-optimized country pages for property listings';
-  };
-  options: {
-    draftAndPublish: true;
-    comment: '';
-  };
-  attributes: {
-    name: Attribute.String &
-      Attribute.Required &
-      Attribute.Unique &
-      Attribute.SetMinMaxLength<{
-        maxLength: 100;
-      }>;
-    slug: Attribute.UID<'api::seo-country.seo-country', 'name'> &
-      Attribute.Required &
-      Attribute.Unique;
-    featured: Attribute.Boolean & Attribute.DefaultTo<false>;
-    meta_title: Attribute.String &
-      Attribute.SetMinMaxLength<{
-        maxLength: 255;
-      }>;
-    meta_description: Attribute.Text &
-      Attribute.SetMinMaxLength<{
-        maxLength: 500;
-      }>;
-    keywords: Attribute.JSON;
-    description: Attribute.Text;
-    hero_image_url: Attribute.String;
-    flag_image_url: Attribute.String;
-    why_invest: Attribute.JSON;
-    property_count: Attribute.Integer & Attribute.DefaultTo<0>;
-    average_price: Attribute.Integer & Attribute.DefaultTo<0>;
-    average_yield: Attribute.Decimal & Attribute.DefaultTo<0>;
-    currency: Attribute.String;
-    timezone: Attribute.String;
-    language: Attribute.String;
-    capital: Attribute.String;
-    continent: Attribute.String;
-    investment_climate: Attribute.String;
-    cities: Attribute.Relation<
-      'api::seo-country.seo-country',
-      'oneToMany',
-      'api::seo-city.seo-city'
-    >;
-    site: Attribute.Relation<
-      'api::seo-country.seo-country',
-      'manyToOne',
-      'api::site.site'
-    >;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::seo-country.seo-country',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::seo-country.seo-country',
+      'api::news-article.news-article',
       'oneToOne',
       'admin::user'
     > &
@@ -1104,6 +908,22 @@ export interface ApiSiteSite extends Schema.CollectionType {
       'oneToMany',
       'api::consultation-country.consultation-country'
     >;
+    faqs: Attribute.Relation<'api::site.site', 'oneToMany', 'api::faq.faq'>;
+    service_features: Attribute.Relation<
+      'api::site.site',
+      'oneToMany',
+      'api::service-feature.service-feature'
+    >;
+    market_statistics: Attribute.Relation<
+      'api::site.site',
+      'oneToMany',
+      'api::market-statistic.market-statistic'
+    >;
+    testimonials: Attribute.Relation<
+      'api::site.site',
+      'oneToMany',
+      'api::testimonial.testimonial'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<'api::site.site', 'oneToOne', 'admin::user'> &
@@ -1130,10 +950,7 @@ declare module '@strapi/types' {
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'plugin::i18n.locale': PluginI18NLocale;
       'api::blog-post.blog-post': ApiBlogPostBlogPost;
-      'api::consultation-country.consultation-country': ApiConsultationCountryConsultationCountry;
-      'api::financing-country.financing-country': ApiFinancingCountryFinancingCountry;
-      'api::seo-city.seo-city': ApiSeoCitySeoCity;
-      'api::seo-country.seo-country': ApiSeoCountrySeoCountry;
+      'api::news-article.news-article': ApiNewsArticleNewsArticle;
       'api::site.site': ApiSiteSite;
     }
   }

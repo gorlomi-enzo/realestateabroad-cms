@@ -1,0 +1,100 @@
+{
+  "kind": "collectionType",
+  "collectionName": "news_articles",
+  "info": {
+    "singularName": "news-article",
+    "pluralName": "news-articles",
+    "displayName": "News Article",
+    "description": "News articles for multiple sites"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true,
+      "maxLength": 200
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "title",
+      "required": true,
+      "unique": true
+    },
+    "excerpt": {
+      "type": "text",
+      "required": true,
+      "maxLength": 300
+    },
+    "content": {
+      "type": "richtext",
+      "required": true
+    },
+    "category": {
+      "type": "enumeration",
+      "enum": [
+        "New Bonuses",
+        "Regulation",
+        "Market News",
+        "Innovation",
+        "Trends",
+        "Industry Analysis"
+      ],
+      "required": true
+    },
+    "publishedDate": {
+      "type": "datetime",
+      "required": true
+    },
+    "lastUpdated": {
+      "type": "datetime",
+      "required": false
+    },
+    "readTime": {
+      "type": "string",
+      "required": true,
+      "default": "5 min",
+      "maxLength": 10
+    },
+    "site": {
+      "type": "enumeration",
+      "enum": [
+        "onlinecasinobonus",
+        "realestateabroad"
+      ],
+      "required": true,
+      "default": "onlinecasinobonus"
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": [
+        "draft",
+        "published"
+      ],
+      "required": true,
+      "default": "draft"
+    },
+    "featuredImage": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": ["images"]
+    },
+    "metaTitle": {
+      "type": "string",
+      "maxLength": 60
+    },
+    "metaDescription": {
+      "type": "text",
+      "maxLength": 160
+    },
+    "metaKeywords": {
+      "type": "string"
+    },
+    "canonicalUrl": {
+      "type": "string"
+    }
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//Users/richardhopp/Desktop/BC1/Production Sites/bonus-comparison-main/**)",
+      "Bash(cat:*)",
+      "Bash(test:*)",
+      "mcp__exa__get_code_context_exa",
+      "Bash(npm run develop:*)",
+      "Bash(npm install)",
+      "Bash(command:*)",
+      "Bash(source:*)",
+      "Bash(nvm use)",
+      "Bash(source ~/.bashrc)",
+      "Bash(chmod:*)",
+      "Bash(/Users/richardhopp/Desktop/Tools/CMS/install-with-node20.sh)",
+      "Bash(/Users/richardhopp/Desktop/Tools/CMS/develop-with-node20.sh:*)",
+      "Bash(node:*)",
+      "Bash(for file in /Users/richardhopp/Desktop/Tools/CMS/src/api/*/content-types/*/schema.json)",
+      "Bash(do echo \"Checking: $file\")",
+      "Bash(curl:*)",
+      "Bash(git add:*)",
+      "Bash(/Users/richardhopp/Desktop/Tools/CMS/deploy-changes.sh:*)",
+      "Bash(git fsck:*)",
+      "Bash(git reset:*)",
+      "Bash(pkill:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
