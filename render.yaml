@@ -6,7 +6,7 @@ services:
     region: oregon
     branch: master
     buildCommand: rm -rf node_modules package-lock.json && npm cache clean --force && npm install && npm run build
-    startCommand: npm start
+    startCommand: node scripts/init-uploads-dir.js && npm start
     healthCheckPath: /admin
     disks:
       - name: strapi-uploads

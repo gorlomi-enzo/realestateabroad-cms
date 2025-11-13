@@ -5,7 +5,7 @@
   "description": "A Strapi application",
   "scripts": {
     "develop": "strapi develop",
-    "start": "node wake-database.js && strapi start",
+    "start": "node scripts/init-uploads-dir.js && node wake-database.js && strapi start",
     "start-direct": "strapi start",
     "build": "strapi build",
     "strapi": "strapi",
