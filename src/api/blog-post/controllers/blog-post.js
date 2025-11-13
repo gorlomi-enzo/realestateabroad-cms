@@ -25,12 +25,14 @@ module.exports = createCoreController('api::blog-post.blog-post', ({ strapi }) =
       site: { id: { $eq: site.id } }
     };
 
-    // Populate site relation by default
+    // Populate site relation and featuredImage by default
     ctx.query.populate = {
       ...ctx.query.populate,
       site: {
         fields: ['key', 'name', 'domains']
-      }
+      },
+      featuredImage: true,
+      cover_image: true
     };
 
     // Call the default find method
@@ -56,12 +58,14 @@ module.exports = createCoreController('api::blog-post.blog-post', ({ strapi }) =
       site: { id: { $eq: site.id } }
     };
 
-    // Populate site relation
+    // Populate site relation and featuredImage
     ctx.query.populate = {
       ...ctx.query.populate,
       site: {
         fields: ['key', 'name', 'domains']
-      }
+      },
+      featuredImage: true,
+      cover_image: true
     };
 
     const response = await super.findOne(ctx);
@@ -90,7 +94,9 @@ module.exports = createCoreController('api::blog-post.blog-post', ({ strapi }) =
         populate: {
           site: {
             select: ['key', 'name', 'domains']
-          }
+          },
+          featuredImage: true,
+          cover_image: true
         }
       });
 

@@ -39,7 +39,9 @@ module.exports = {
           'api::site.site.find',
           'api::site.site.findOne',
           'api::news-article.news-article.find',
-          'api::news-article.news-article.findOne'
+          'api::news-article.news-article.findOne',
+          'plugin::upload.content-api.find',
+          'plugin::upload.content-api.findOne'
         ];
         
         for (const action of requiredActions) {
