@@ -12,14 +12,14 @@ module.exports = ({ env }) => ({
   },
   upload: {
     config: {
-      provider: env('NODE_ENV') === 'production' ? 'cloudinary' : 'local',
+      provider: 'local',
       providerOptions: {
-        // Cloudinary config for production
-        cloud_name: env('CLOUDINARY_NAME'),
-        api_key: env('CLOUDINARY_KEY'),
-        api_secret: env('CLOUDINARY_SECRET'),
-        // Local config for development
-        sizeLimit: 100000,
+        sizeLimit: 100000000, // 100MB
+      },
+      actionOptions: {
+        upload: {},
+        uploadStream: {},
+        delete: {},
       },
     },
   },

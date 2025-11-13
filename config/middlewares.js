@@ -1,4 +1,4 @@
-module.exports = [
+module.exports = ({ env }) => [
   'strapi::errors',
   'strapi::security',
   'strapi::cors',
@@ -8,6 +8,10 @@ module.exports = [
   'strapi::body',
   'strapi::session',
   'strapi::favicon',
+  {
+    name: 'global::persistent-uploads',
+    config: {},
+  },
   'strapi::public',
   {
     name: 'global::site-media',
